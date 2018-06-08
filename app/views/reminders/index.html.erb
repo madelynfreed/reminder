@@ -1,0 +1,20 @@
+<h1>List of Reminders</h1>
+<table>
+  <tr>
+    <td>Reminder</td>
+    <td>Time</td>
+    <td></td>
+  </tr>
+
+  <% @reminders.each do |reminder| %>
+    <tr>
+      <td><%= reminder.content %></td>
+      <td><%= reminder.time %></td>
+      <td><%= link_to 'Show', reminder_path(reminder) %></td>
+      <td><%= link_to 'Destroy', reminder_path(reminder),
+              method: :delete,
+              data: { confirm: "sure?" } %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'New reminder', new_reminder_path %>

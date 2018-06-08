@@ -1,0 +1,12 @@
+<p>
+  <strong>Reminder:</strong>
+  <%= @reminder.content %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @reminder.time %>
+</p>
+<p><%= link_to 'Back', reminders_path %></p>
+<p><%= link_to 'New', new_reminder_path %></p>
+
