@@ -9,7 +9,7 @@ class Reminder < ApplicationRecord
       transitions :from => :created, :to => :scheduled
     end
 
-    event :send do
+    event :pending_send do
       transitions :from => :scheduled, :to => :sent
     end
 
@@ -17,7 +17,7 @@ class Reminder < ApplicationRecord
       transitions :from => :sent, :to => :acknowledged
     end
 
-    event :delete do
+    event :kill do
       transitions :from => [:created, :scheduled, :sent, :acknowledged], :to => :deleted
     end
   end
