@@ -10,6 +10,7 @@
     <tr>
       <td><%= reminder.content %></td>
       <td><%= reminder.time %></td>
+      <td><%= reminder.aasm_state %></td>
       <td><%= link_to 'Show', reminder_path(reminder) %></td>
       <td><%= link_to 'Destroy', reminder_path(reminder),
               method: :delete,

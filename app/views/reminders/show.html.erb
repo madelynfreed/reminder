@@ -7,6 +7,11 @@
   <strong>Time:</strong>
   <%= @reminder.time %>
 </p>
+
+<p>
+  <strong>State:</strong>
+  <%= @reminder.aasm_state %>
+</p>
 <p><%= link_to 'Back', reminders_path %></p>
 <p><%= link_to 'New', new_reminder_path %></p>
 

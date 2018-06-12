@@ -14,6 +14,7 @@ class RemindersController < ApplicationController
   def create
     @reminder = Reminder.new(reminder_params)
     @reminder.save
+    SchedulerJob.perform_now(@reminder.id)
     redirect_to @reminder
 
     # ReminderJob
@@ -21,6 +22,7 @@ class RemindersController < ApplicationController
 
   def destroy
     @reminder = Reminder.find(params[:id])
+    @reminder.kill
     @reminder.destroy
 
     redirect_to reminders_path
