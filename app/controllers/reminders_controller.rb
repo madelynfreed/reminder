@@ -7,23 +7,31 @@ class RemindersController < ApplicationController
     @reminder = Reminder.find(params[:id])
   end
 
+  def pending
+    @reminders = Reminder.where(aasm_state: 'pushed')
+  end
+
   def new
     @reminder = Reminder.new
   end
 
   def create
     @reminder = Reminder.new(reminder_params)
-    @reminder.save
-    SchedulerJob.perform_now(@reminder.id)
-    redirect_to @reminder
-
-    # ReminderJob
+    if @reminder.save
+      flash[:success] = "u saved it"
+      SchedulerJob.perform_now(@reminder.id)
+      redirect_to @reminder
+    else
+      render 'new'
+    end
   end
 
   def destroy
     @reminder = Reminder.find(params[:id])
-    @reminder.kill
+    @reminder.kill!
     @reminder.destroy
+
+    flash[:success] = "u killed it"
 
     redirect_to reminders_path
   end

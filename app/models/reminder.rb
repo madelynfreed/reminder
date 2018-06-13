@@ -3,22 +3,22 @@ class Reminder < ApplicationRecord
 
   aasm do
     state :created, :initial => true
-    state :scheduled, :sent, :acknowledged, :deleted
+    state :scheduled, :pushed, :acknowledged, :deleted
 
     event :schedule do
       transitions :from => :created, :to => :scheduled
     end
 
-    event :pending_send do
-      transitions :from => :scheduled, :to => :sent
+    event :push do
+      transitions :from => :scheduled, :to => :pushed
     end
 
     event :acknowledge do
-      transitions :from => :sent, :to => :acknowledged
+      transitions :from => :pushed, :to => :acknowledged
     end
 
     event :kill do
-      transitions :from => [:created, :scheduled, :sent, :acknowledged], :to => :deleted
+      transitions :from => [:created, :scheduled, :pushed, :acknowledged], :to => :deleted
     end
   end
 end

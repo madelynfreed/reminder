@@ -3,7 +3,7 @@ class SchedulerJob < ActiveJob::Base
     reminder = Reminder.find(reminder_id)
     how_many_minutes = calculate_time_until(reminder)
     SchedulerWorker.perform_async(how_many_minutes, reminder_id)
-
+    reminder.schedule!
   end
 
   private
