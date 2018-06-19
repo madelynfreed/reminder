@@ -26,6 +26,13 @@ class RemindersController < ApplicationController
     end
   end
 
+  def acknowledge
+    @reminder = Reminder.find(params[:id])
+    @reminder.acknowledge!
+
+    redirect_to reminder_path
+  end
+
   def destroy
     @reminder = Reminder.find(params[:id])
     @reminder.kill!

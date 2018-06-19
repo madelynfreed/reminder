@@ -1,0 +1,22 @@
+<h1>List of Reminders</h1>
+<table>
+  <tr>
+    <td>Reminder</td>
+    <td>Time</td>
+    <td>State</td>
+    <td></td>
+  </tr>
+
+  <p><%= link_to 'Back', reminders_path %></p>
+
+  <% @reminders.each do |reminder| %>
+    <tr>
+      <td><%= reminder.content %></td>
+      <td><%= reminder.time %></td>
+      <td><%= reminder.aasm_state %></td>
+      <td><%= link_to 'Acknowledge',
+        "/reminders/#{reminder.id}/acknowledge",
+        method: :post %></td>
+    </tr>
+  <% end %>
+</table>
